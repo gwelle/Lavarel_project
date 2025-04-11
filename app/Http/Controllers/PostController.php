@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class PostController extends Controller
+{
+    public function index(){
+        $articles = [
+            [
+                'title' => 'Article 1',
+                'content' => 'This is the content of article 1.',
+            ],
+            [
+                'title' => 'Article 2',
+                'content' => 'This is the content of article 2.',
+            ],
+            [
+                'title' => 'Article 3',
+                'content' => 'This is the content of article 3.',
+            ],
+        ];
+    
+        return view('home', ['articles' => $articles]);
+    }
+}

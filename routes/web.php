@@ -1,26 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
-Route::get('/', function () {
-
-    $articles = [
-        [
-            'title' => 'Article 1',
-            'content' => 'This is the content of article 1.',
-        ],
-        [
-            'title' => 'Article 2',
-            'content' => 'This is the content of article 2.',
-        ],
-        [
-            'title' => 'Article 3',
-            'content' => 'This is the content of article 3.',
-        ],
-    ];
-
-    return view('home', ['articles' => $articles]);
-});
+// Au lieu de ressoudre directement la fonction anonyme  dans le fichier de routes
+// on va appeler le controller et la méthode concernée
+Route::get('/',[PostController::class,'index']);
 
 Route::get('hello-world', function(){
     return view('hello-world');
