@@ -9,7 +9,7 @@
     <h1>Nos articles</h1>
     <ul>
         @foreach($articles as $article)
-            <li>{{ $article->title }}</li>
+            <a href="{{ $article->id }}"><li>{{ $article->title }}</li></a>
         @endforeach
 
     </ul>

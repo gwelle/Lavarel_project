@@ -14,4 +14,8 @@ class PostController extends Controller
         // The view will be passed an array of posts
         return view('home', ['articles' => Post::all()]);
     }
+
+    public function show($id){
+        return view('detail', ['post' => Post::findOrFail($id)]);
+    }
 }
