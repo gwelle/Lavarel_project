@@ -9,7 +9,7 @@ Route::get('/',[PostController::class,'index']);
 
 
 
-Route::get('/{id}',[PostController::class,'show']);
+Route::get('/{post}',[PostController::class,'show']);
 
 Route::get('hello-world', function(){
     return view('hello-world');
