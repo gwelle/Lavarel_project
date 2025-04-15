@@ -1,16 +1,20 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
 
-// Au lieu de ressoudre directement la fonction anonyme  dans le fichier de routes
-// on va appeler le controller et la méthode concernée
-Route::get('/',[PostController::class,'index']);
-
-
-
-Route::get('/{post}',[PostController::class,'show']);
-
-Route::get('hello-world', function(){
-    return view('hello-world');
+Route::get('/', function () {
+    return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
