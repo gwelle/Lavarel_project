@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index(){
+
+        
         // Fetch all posts from the database
         // and pass them to the view
         // The view will be located at resources/views/home.blade.php
