@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use GuzzleHttp\Psr7\Request;
 
 Route::get('/welcome', function () {
@@ -29,8 +30,10 @@ Route::match(['get', 'post'], '/hello_world', function(){
 
 // any() permet d'écouter toutes les requêtes HTTP
 Route::any('/test', function(){
-    return view('test');
+    return view('test',["framework"=>'Laravel']);
 });
+
+Route::get('users',[UserController::class,'index']);
 
 // Au lieu de ressoudre directement la fonction anonyme  dans le fichier de routes
 // on va appeler le controller et la méthode concernée
