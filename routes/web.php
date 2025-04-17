@@ -35,14 +35,18 @@ Route::any('/test', function(){
 
 Route::get('users',[UserController::class,'index'])->name('users.index');
 
-Route::get('users/{id}',[UserController::class,'show']);
+//Route::get('users/{id}',[UserController::class,'show']);
+
+Route::get('users/create',[UserController::class,'create'])->name('users.create');
+
+Route::post('users/store',[UserController::class,'store'])->name('users.store');
 
 // Au lieu de ressoudre directement la fonction anonyme  dans le fichier de routes
 // on va appeler le controller et la méthode concernée
 Route::get('/',[PostController::class,'index']);
 
 
-//Route::get('/{post}',[PostController::class,'show']);
+Route::get('/{post}',[PostController::class,'show']);
 
 
 // Pour un crud complet, on va utiliser la méthode resources
