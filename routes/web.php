@@ -9,7 +9,7 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-// Route qui permet de définir un nom pour la rout
+// Route qui permet de définir un nom pour la route
 Route::get('/user/profile', function () {
     return 'profile';
 })->name('profile');
@@ -33,14 +33,16 @@ Route::any('/test', function(){
     return view('test',["framework"=>'Laravel']);
 });
 
-Route::get('users',[UserController::class,'index']);
+Route::get('users',[UserController::class,'index'])->name('users.index');
+
+Route::get('users/{id}',[UserController::class,'show']);
 
 // Au lieu de ressoudre directement la fonction anonyme  dans le fichier de routes
 // on va appeler le controller et la méthode concernée
 Route::get('/',[PostController::class,'index']);
 
 
-Route::get('/{post}',[PostController::class,'show']);
+//Route::get('/{post}',[PostController::class,'show']);
 
 
 // Pour un crud complet, on va utiliser la méthode resources

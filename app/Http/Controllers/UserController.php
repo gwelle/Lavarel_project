@@ -12,4 +12,8 @@ class UserController extends Controller
         $data['users'] = User::orderBy('id', 'desc')->get();
         return view('users.index',["user"=>"John Doe", "age"=>30, "users"=>$data]);
     }
+
+    public function show(User $user){
+        return view('users.show',["user"=>$user]);
+    }
 }
