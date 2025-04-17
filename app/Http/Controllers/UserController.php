@@ -13,7 +13,7 @@ class UserController extends Controller
         return view('users.index',["user"=>"John Doe", "age"=>30, "users"=>$data]);
     }
 
-    public function show(User $user){
-        return view('users.show',["user"=>$user]);
+    public function show(string $id){
+        return view('users.show',["user"=>User::findOrFail($id)]);
     }
 }
