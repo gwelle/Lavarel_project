@@ -7,7 +7,7 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    /** 
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -17,7 +17,7 @@ class UserController extends Controller
         return view('users.index',["user"=>"John Doe", "age"=>30, "users"=>$data]);
     }
 
-    /** 
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -26,7 +26,7 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    /** 
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -50,7 +50,7 @@ class UserController extends Controller
     }
 
 
-    /** 
+    /**
      * Display the specified resource.
      *
      * @param  string  $id

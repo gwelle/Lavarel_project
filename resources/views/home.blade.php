@@ -13,5 +13,7 @@
         @endforeach
     </ul>
 
+    {{-- Je donne à la vue blade la responsabilité de la pagination --}}
+    {!! $articles->links() !!}
 </body>
 </html>

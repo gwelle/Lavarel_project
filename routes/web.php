@@ -46,7 +46,9 @@ Route::post('users/store',[UserController::class,'store'])->name('users.store');
 Route::get('/',[PostController::class,'index']);
 
 
-Route::get('/{post}',[PostController::class,'show']);
+//Route::get('/{post}',[PostController::class,'show']);
+
+Route::get('query', [PostController::class, 'queryTest'])->name('query-test');
 
 
 // Pour un crud complet, on va utiliser la méthode resources
