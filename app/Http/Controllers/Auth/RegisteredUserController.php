@@ -9,8 +9,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Mail\UserInfo;
 
 class RegisteredUserController extends Controller
 {
@@ -41,10 +43,18 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // Register the user
+        // This event is fired when a new user is registered
+        // It can be used to send a welcome email, log the registration, etc.
         event(new Registered($user));
 
+        // Send email to the user
+        Mail::to($user->email)->send(new UserInfo($user));
+
+        // Log the user in
         Auth::login($user);
 
+        // Redirect to the dashboard
         return redirect(route('dashboard', absolute: false));
     }
 }
