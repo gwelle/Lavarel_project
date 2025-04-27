@@ -1,15 +1,35 @@
+@extends('layouts.app')
+@section('scripts')
+<!-- JS et CSS  -->
+@endsection
+
+@section('content')
+ 
 <div>
-    <!-- I begin to speak only when I am certain what I will say is not better left unsaid. - Cato the Younger -->
     
-    <div class="flex flex-col">
         @foreach ($posts as $post)
-            <div class="flex flex-row">
-                <div class="flex-1">
-                    {{ $post->title }}
-                </div>
-                <div class="flex-1">
-                    {{ $post->content }}
-                </div>
-            </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ $post->title }}</td>
+                    <td>{{ $post->content }}</td>
+                </tr>
+            </tbody>
+           <button> <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">View</a></button>
+            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary">Edit</a>
+            <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Delete</button>
+        </table>
         @endforeach
 </div>
+
+@endsection

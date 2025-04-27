@@ -44,6 +44,19 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        // Validate the request data
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+        // Create a new post instance
+        $post = new Post();
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        // Save the post to the database
+        $post->save();
+        // Redirect to the posts index page with a success message
+        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
 
     /**
@@ -51,7 +64,10 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Find the post by its ID
+        $post = Post::findOrFail($id);
+        // Return the view with the post data
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -59,7 +75,10 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Find the post by its ID
+        $post = Post::findOrFail($id);
+        // Return the edit view with the post data
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -67,7 +86,20 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validate the request data
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+        // Find the post by its ID
+        $post = Post::findOrFail($id);
+        // Update the post data
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        // Save the updated post to the database
+        $post->save();
+        // Redirect to the posts index page with a success message
+        return redirect()->route('posts.index')->with('success', 'Post updated successfully.');
     }
 
     /**
@@ -75,6 +107,11 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Find the post by its ID
+        $post = Post::findOrFail($id);
+        // Delete the post from the database
+        $post->delete();
+        // Redirect to the posts index page with a success message
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
     }
 }
